@@ -6,11 +6,13 @@ A basic gem that adds voting capabilities to a Mongoid document. Will work on em
 
 === Rails 3.x
 
-To install the gem, add this to your Gemfile
+To install the gem, add this to your Gemfile:
 
   gem 'mongoid_vote'
 
-Run "bundle install".
+Run:
+  
+  bundle install
 
 Then add this to the document model you'd like to add voting capabilites to:
 
