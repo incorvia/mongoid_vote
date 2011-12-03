@@ -1,6 +1,6 @@
 = Mongoid-Vote
 
-A basic gem that adds voting capabilities to a Mongoid document including embedded documents.
+A basic gem that adds voting capabilities to a Mongoid document. Will work on embedded documents.
 
 == Installation
 
