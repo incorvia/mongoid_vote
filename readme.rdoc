@@ -10,6 +10,10 @@ To install the gem, add this to your Gemfile
 
   gem 'mongoid_vote'
 
+Then add this to the document model you'd like to add voting capabilites to:
+
+  include MongoidVote::Voteable
+
 run "bundle install"
 
 == Usage Examples
