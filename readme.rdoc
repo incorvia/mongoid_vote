@@ -1,0 +1,29 @@
+= Mongoid-Vote
+
+Created by: Kevin Incorvia.
+
+A basic gem that adds voting capabilities to a Mongoid document or embedded document.
+
+== Installation
+
+=== Rails 3.x
+
+To install the gem, add this to your Gemfile
+
+  gem 'mongoid_vote'
+
+run "bundle install"
+
+== Usage Examples
+
+up vote: @comment.vote(user, "up")
+down vote: @comment.vote(user, "down")
+
+up count: @comment.votes["up_count"]
+down count: @comment.votes["down_count"]
+
+vote count: @comment.votes["count"]
+
+== Notes
+
+Currently only one vote is allowed per object and an opposite vote will replace a previous vote.
