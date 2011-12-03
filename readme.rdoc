@@ -16,8 +16,6 @@ Then add this to the document model you'd like to add voting capabilites to:
 
   include MongoidVote::Voteable
 
-run "bundle install"
-
 == Usage Examples
 
 
