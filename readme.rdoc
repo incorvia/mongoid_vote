@@ -1,7 +1,5 @@
 = Mongoid-Vote
 
-Created by: Kevin Incorvia.
-
 A basic gem that adds voting capabilities to a Mongoid document or embedded document.
 
 == Installation
@@ -16,14 +14,27 @@ run "bundle install"
 
 == Usage Examples
 
-up vote: @comment.vote(user, "up")
-down vote: @comment.vote(user, "down")
+up vote:
+  @comment.upvote(@user)
 
-up count: @comment.votes["up_count"]
-down count: @comment.votes["down_count"]
+down vote:
+  @comment.downvote(@user)
 
-vote count: @comment.votes["count"]
+vote count:
+  @comment.votecount
+
+up vote count:
+  @comment.upcount
+
+down vote count:
+  @comment.downcount
+
+up voters:
+  @comment.upvoters
+
+down voters: 
+  @comment.downvoters
 
 == Notes
 
-Currently only one vote is allowed per object and an opposite vote will replace a previous vote.
+Currently only one vote is allowed per object (i.e. an up vote will replace a previous down vote if one existed).

@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = MongoidVote::VERSION
   s.authors     = ["incorvia"]
   s.email       = ["incorvia@gmail.com"]
-  s.homepage    = "http://www.kevinincorvia.com"
+  s.homepage    = "https://github.com/incorvia/mongoid_vote"
   s.summary     = %q{Mongoid Vote}
   s.description = %q{A basic Mongoid voting gem which allows voting on embedded documents.}
 
