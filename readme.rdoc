@@ -14,26 +14,16 @@ run "bundle install"
 
 == Usage Examples
 
-up vote:
-  @comment.upvote(@user)
 
-down vote:
-  @comment.downvote(@user)
+  @comment.upvote(@user)   # up vote
+  @comment.downvote(@user) # down vote
 
-vote count:
-  @comment.votecount
+  @comment.votecount       # vote count
+  @comment.upcount         # up vote count
+  @comment.downcount       # down vote count
 
-up vote count:
-  @comment.upcount
-
-down vote count:
-  @comment.downcount
-
-up voters:
-  @comment.upvoters
-
-down voters: 
-  @comment.downvoters
+  @comment.upvoters        # up voters 
+  @comment.downvoters      # down voters
 
 == Notes
 
