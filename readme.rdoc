@@ -27,4 +27,4 @@ run "bundle install"
 
 == Notes
 
-Currently only one vote is allowed per object per user (i.e. an up vote will replace a previous down vote if one existed).
+Currently only one vote is allowed per object per user (i.e. an up vote by a user will replace a previous down vote if one existed).
