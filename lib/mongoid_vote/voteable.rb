@@ -20,6 +20,14 @@ module MongoidVote
         vote_adjust(current_vote(user), 'up', user)
       end
 
+      def upvote_toggle(user)
+        vote_adjust(current_vote(user), 'up', user, 1)
+      end
+
+      def downvote_toggle(user)
+        vote_adjust(current_vote(user), 'down', user, 1)
+      end
+
       def downvote(user)
         vote_adjust(current_vote(user), 'down', user)
       end
@@ -54,8 +62,18 @@ module MongoidVote
 
     private
 
-      def vote_adjust(current, vote, user)
-        unless current.to_s == vote
+      def vote_adjust(current, vote, user, toggle = 0)
+        if current.to_s == vote
+          if current == :up && vote == "up" && toggle == 1
+            self.votes["up_count"] -= 1
+            self.votes["count"] -= 1
+            self.votes["up"].delete_if {|x| x == user.id.to_s}
+          elsif current == :down && vote == "down" && toggle == 1
+            self.votes["down_count"] += 1
+            self.votes["count"] += 1
+            self.votes["down"].delete_if {|x| x == user.id.to_s}
+          end
+        else
           if !current && vote == "up"
             self.votes["up_count"] += 1
             self.votes["count"] += 1

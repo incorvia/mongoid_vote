@@ -21,17 +21,20 @@ Then add this to the document model you'd like to add voting capabilites to:
 == Usage Examples
 
 
-  @comment.upvote(@user)   # up vote
-  @comment.downvote(@user) # down vote
+  @comment.upvote(@user)           # up vote
+  @comment.downvote(@user)         # down vote
 
-  @comment.votecount       # vote count
-  @comment.upcount         # up vote count
-  @comment.downcount       # down vote count
+  @comment.upvote_toggle(@user)    # acts as upvote but if up vote is already present, removes vote instead. (i.e. reddit style)
+  @comment.downvote_toggle(@user)  # acts as upvote but if up vote is already present, removes vote instead. (i.e. reddit style)
 
-  @comment.upvoters        # up voters 
-  @comment.downvoters      # down voters
+  @comment.votecount               # vote count
+  @comment.upcount                 # up vote count
+  @comment.downcount               # down vote count
 
-  @comment.current_vote(@user)  # returns :up / :down / nil
+  @comment.upvoters                # up voters 
+  @comment.downvoters              # down voters
+
+  @comment.current_vote(@user)     # returns :up / :down / nil
 
 == Notes
 
