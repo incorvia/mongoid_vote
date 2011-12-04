@@ -24,8 +24,8 @@ Then add this to the document model you'd like to add voting capabilites to:
   @comment.upvote(@user)           # up vote
   @comment.downvote(@user)         # down vote
 
-  @comment.upvote_toggle(@user)    # acts as upvote but if up vote is already present, removes vote instead. (i.e. reddit style)
-  @comment.downvote_toggle(@user)  # acts as upvote but if up vote is already present, removes vote instead. (i.e. reddit style)
+  @comment.upvote_toggle(@user)    # acts as upvote / if up vote already present, removes vote instead. (i.e. reddit style)
+  @comment.downvote_toggle(@user)  # acts as downvote / if down vote already present, removes vote instead. (i.e. reddit style)
 
   @comment.votecount               # vote count
   @comment.upcount                 # up vote count
