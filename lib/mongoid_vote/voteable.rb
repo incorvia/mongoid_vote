@@ -44,8 +44,6 @@ module MongoidVote
         self.votes["down"]
       end
 
-    private
-
       def current_vote(user)
         if self.votes["up"].include? user.id.to_s
           :up
@@ -54,23 +52,25 @@ module MongoidVote
         end
       end
 
-      def vote_adjust(current_vote, vote, user)
-        unless current_vote.to_s == vote
-          if !current_vote && vote == "up"
+    private
+
+      def vote_adjust(current, vote, user)
+        unless current.to_s == vote
+          if !current && vote == "up"
             self.votes["up_count"] += 1
             self.votes["count"] += 1
             self.votes["up"] << user.id.to_s
-          elsif !current_vote && vote == "down"
+          elsif !current && vote == "down"
             self.votes["down_count"] -= 1
             self.votes["count"] -= 1
             self.votes["down"] << user.id.to_s
-          elsif current_vote == :up && vote == "down"
+          elsif current == :up && vote == "down"
             self.votes["up_count"] -= 1
             self.votes["down_count"] -= 1
             self.votes["count"] -= 2
             self.votes["up"].delete_if {|x| x == user.id.to_s}
             self.votes["down"] << user.id.to_s
-          elsif current_vote == :down && vote == "up"
+          elsif current == :down && vote == "up"
             self.votes["down_count"] += 1
             self.votes["up_count"] += 1
             self.votes["count"] += 2

@@ -31,6 +31,8 @@ Then add this to the document model you'd like to add voting capabilites to:
   @comment.upvoters        # up voters 
   @comment.downvoters      # down voters
 
+  @comment.current_vote(@user)  # returns :up / :down / nil
+
 == Notes
 
 Currently only one vote is allowed per object per user (i.e. an up vote by a user will replace a previous down vote if one existed).
