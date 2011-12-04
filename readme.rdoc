@@ -20,7 +20,6 @@ Then add this to the document model you'd like to add voting capabilites to:
 
 == Usage Examples
 
-
   @comment.upvote(@user)           # up vote
   @comment.downvote(@user)         # down vote
 
