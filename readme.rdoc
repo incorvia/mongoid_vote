@@ -26,12 +26,12 @@ Then add this to the document model you'd like to add voting capabilites to:
   @comment.upvote_toggle(@user)    # acts as upvote / if up vote already present, removes vote instead. (i.e. reddit style)
   @comment.downvote_toggle(@user)  # acts as downvote / if down vote already present, removes vote instead. (i.e. reddit style)
 
-  @comment.votecount               # vote count
-  @comment.upcount                 # up vote count
-  @comment.downcount               # down vote count
+  @comment.vote_count               # vote count
+  @comment.up_count                 # up vote count
+  @comment.down_count               # down vote count
 
-  @comment.upvoters                # up voters 
-  @comment.downvoters              # down voters
+  @comment.up_voters                # up voters 
+  @comment.down_voters              # down voters
 
   @comment.current_vote(@user)     # returns :up / :down / nil
 
