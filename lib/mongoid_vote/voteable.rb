@@ -2,100 +2,74 @@ module MongoidVote
   module Voteable
     extend ActiveSupport::Concern
 
-    DEFAULT_VOTES = {
-      "up" => [],
-      "down" => [],
-      "up_count" => 0,
-      "down_count" => 0,
-      "count" => 0,
-    }
-
     included do
-      field :votes, :type => Hash, :default => DEFAULT_VOTES
+      field :up_voters,     :type => Array,   :default => []
+      field :down_voters,   :type => Array,   :default => []
+      field :up_count,      :type => Integer, :default => 0
+      field :down_count,    :type => Integer, :default => 0
+      field :vote_count,    :type => Integer, :default => 0
     end
 
     module InstanceMethods
-
+      
       def upvote(user)
-        vote_adjust(current_vote(user), 'up', user)
+        vote_handler(current_vote(user), :up, user)
       end
 
       def upvote_toggle(user)
-        vote_adjust(current_vote(user), 'up', user, 1)
-      end
-
-      def downvote_toggle(user)
-        vote_adjust(current_vote(user), 'down', user, 1)
+        vote_handler(current_vote(user), :up, user, 1)
       end
 
       def downvote(user)
-        vote_adjust(current_vote(user), 'down', user)
+        vote_handler(current_vote(user), :down, user)
       end
 
-      def votecount
-        self.votes["count"]
-      end
-
-      def downcount
-        self.votes["down_count"]
-      end
-
-      def upcount
-        self.votes["up_count"]
-      end
-
-      def upvoters
-        self.votes["up"]
-      end
-
-      def downvoters
-        self.votes["down"]
+      def downvote_toggle(user)
+        vote_handler(current_vote(user), :down, user, 1)
       end
 
       def current_vote(user)
-        if self.votes["up"].include? user.id.to_s
+        if self.up_voters.include? user.id.to_s
           :up
-        elsif self.votes["down"].include? user.id.to_s
+        elsif self.down_voters.include? user.id.to_s
           :down
         end
       end
 
     private
 
-      def vote_adjust(current, vote, user, toggle = 0)
+      def vote_handler(current, vote, user, toggle = 0)
         if current.to_s == vote
-          if current == :up && vote == "up" && toggle == 1
-            self.votes["up_count"] -= 1
-            self.votes["count"] -= 1
-            self.votes["up"].delete_if {|x| x == user.id.to_s}
-          elsif current == :down && vote == "down" && toggle == 1
-            self.votes["down_count"] += 1
-            self.votes["count"] += 1
-            self.votes["down"].delete_if {|x| x == user.id.to_s}
+          if (current && vote == :up) && toggle == 1
+            vote_adjust(-1, 0, -1)
+            self.up_voters.delete_if {|x| x == user.id.to_s}
+          elsif (current && vote == :down) && toggle == 1
+            vote_adjust(0, 1, 1)
+            self.down_voters.delete_if {|x| x == user.id.to_s}
           end
         else
-          if !current && vote == "up"
-            self.votes["up_count"] += 1
-            self.votes["count"] += 1
-            self.votes["up"] << user.id.to_s
-          elsif !current && vote == "down"
-            self.votes["down_count"] -= 1
-            self.votes["count"] -= 1
-            self.votes["down"] << user.id.to_s
-          elsif current == :up && vote == "down"
-            self.votes["up_count"] -= 1
-            self.votes["down_count"] -= 1
-            self.votes["count"] -= 2
-            self.votes["up"].delete_if {|x| x == user.id.to_s}
-            self.votes["down"] << user.id.to_s
-          elsif current == :down && vote == "up"
-            self.votes["down_count"] += 1
-            self.votes["up_count"] += 1
-            self.votes["count"] += 2
-            self.votes["down"].delete_if {|x| x == user.id.to_s}
-            self.votes["up"] << user.id.to_s
+          if !current && vote == :up
+            vote_adjust(1, 0, 1)
+            self.up_voters << user.id.to_s
+          elsif !current && vote == :down
+            vote_adjust(0, -1, -1)
+            self.down_voters << user.id.to_s
+          elsif current == :up && vote == :down
+            vote_adjust(-1, -1, -2)
+            self.up_voters.delete_if {|x| x == user.id.to_s}
+            self.down_voters << user.id.to_s
+          elsif current == :down && vote == :up
+            vote_adjust(1, 1, 2)
+            self.down_voters.delete_if {|x| x == user.id.to_s}
+            self.up_voters << user.id.to_s
           end
         end
+      end
+
+      def vote_adjust(up, down, count)
+        self.up_count += up
+        self.down_count += down
+        self.vote_count += count
       end
     end
   end
