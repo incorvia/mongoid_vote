@@ -39,7 +39,7 @@ module MongoidVote
     private
 
       def vote_handler(current, vote, user, toggle = 0)
-        if current.to_s == vote
+        if current == vote
           if (current && vote == :up) && toggle == 1
             vote_adjust(-1, 0, -1)
             self.up_voters.delete_if {|x| x == user.id.to_s}
