@@ -4,7 +4,7 @@ A basic gem that adds voting capabilities to a Mongoid document. Will work on em
 
 == Installation
 
-=== Rails 3.x
+=== Rails 3.x and above
 
 To install the gem, add this to your Gemfile:
 
