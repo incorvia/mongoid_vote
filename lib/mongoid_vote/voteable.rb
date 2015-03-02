@@ -10,7 +10,7 @@ module MongoidVote
       field :vote_count,    :type => Integer, :default => 0
     end
 
-    module InstanceMethods
+
       
       def upvote(user)
         vote_handler(current_vote(user), :up, user)
@@ -71,6 +71,6 @@ module MongoidVote
         self.down_count += down
         self.vote_count += count
       end
-    end
+
   end
 end
